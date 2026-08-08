@@ -566,3 +566,24 @@ button:focus-visible {
     margin-top: 0 !important;
   }
 }
+
+/* AUGUST EMERGENCY NO-BLANK FIX V2 */
+.august-final-reveal,
+.august-final-reveal.august-final-visible,
+main section,
+main article {
+  opacity: 1 !important;
+  transform: none !important;
+  filter: none !important;
+  visibility: visible !important;
+}
+
+@media (min-width: 1px) {
+  main > section:first-child,
+  main > div:first-child {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    filter: none !important;
+  }
+}

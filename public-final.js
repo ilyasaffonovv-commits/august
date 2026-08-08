@@ -638,3 +638,58 @@
     boot();
   }
 })();
+
+/* AUGUST_EMERGENCY_NO_BLANK_FIX_V2 */
+(() => {
+  "use strict";
+
+  const unhide = () => {
+    document
+      .querySelectorAll(".august-final-reveal")
+      .forEach((node) => {
+        node.classList.add("august-final-visible");
+        node.style.setProperty("opacity", "1", "important");
+        node.style.setProperty("visibility", "visible", "important");
+        node.style.setProperty("transform", "none", "important");
+        node.style.setProperty("filter", "none", "important");
+      });
+
+    const main = document.querySelector("main");
+    if (!main) return;
+
+    const first = main.firstElementChild;
+    if (!first) return;
+
+    first.style.setProperty("opacity", "1", "important");
+    first.style.setProperty("visibility", "visible", "important");
+    first.style.setProperty("transform", "none", "important");
+    first.style.setProperty("filter", "none", "important");
+  };
+
+  const boot = () => {
+    unhide();
+
+    const observer = new MutationObserver(unhide);
+    observer.observe(document.body, {
+      subtree: true,
+      childList: true,
+      attributes: true,
+      attributeFilter: ["class", "style"]
+    });
+
+    window.setTimeout(unhide, 100);
+    window.setTimeout(unhide, 500);
+    window.setTimeout(unhide, 1200);
+    window.setTimeout(unhide, 2400);
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener(
+      "DOMContentLoaded",
+      boot,
+      { once: true }
+    );
+  } else {
+    boot();
+  }
+})();

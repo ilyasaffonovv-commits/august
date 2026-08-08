@@ -527,3 +527,114 @@
     boot();
   }
 })();
+
+/* AUGUST_MOBILE_FIRST_SCREEN_FIX_V1 */
+(() => {
+  "use strict";
+
+  const mobile = window.matchMedia("(max-width: 780px)");
+
+  const visibleText = (node) =>
+    (node?.textContent || "")
+      .replace(/\s+/g, " ")
+      .trim()
+      .toLowerCase();
+
+  const findHero = () => {
+    const main = document.querySelector("main");
+    if (!main) return null;
+
+    const direct = Array.from(main.children);
+
+    const byText = direct.find((node) => {
+      const text = visibleText(node);
+      return (
+        text.includes("august command center") ||
+        text.includes("локальный интеллектуальный агент") ||
+        text.includes("local system online")
+      );
+    });
+
+    if (byText) return byText;
+
+    const firstSection = main.querySelector(":scope > section");
+    if (firstSection) return firstSection;
+
+    return direct[0] || null;
+  };
+
+  const apply = () => {
+    if (!mobile.matches) return;
+
+    const main = document.querySelector("main");
+    const hero = findHero();
+
+    if (!main || !hero) return;
+
+    main.classList.add("august-mobile-main-fix");
+    hero.classList.add("august-mobile-first-screen-fix");
+
+    hero.style.setProperty("min-height", "auto", "important");
+    hero.style.setProperty("height", "auto", "important");
+    hero.style.setProperty("margin-top", "0", "important");
+    hero.style.setProperty("padding-top", "20px", "important");
+    hero.style.setProperty("padding-bottom", "34px", "important");
+    hero.style.setProperty("justify-content", "flex-start", "important");
+
+    const descendants = hero.querySelectorAll("*");
+    const viewport = Math.max(
+      window.innerHeight || 0,
+      document.documentElement.clientHeight || 0
+    );
+
+    for (const node of descendants) {
+      const style = getComputedStyle(node);
+
+      if (style.marginTop === "auto") {
+        node.style.setProperty("margin-top", "0", "important");
+      }
+
+      const minHeight = parseFloat(style.minHeight);
+
+      if (
+        Number.isFinite(minHeight) &&
+        viewport > 0 &&
+        minHeight > viewport * 1.05
+      ) {
+        node.style.setProperty("min-height", "auto", "important");
+      }
+    }
+  };
+
+  const boot = () => {
+    apply();
+
+    let timer = 0;
+
+    const observer = new MutationObserver(() => {
+      window.clearTimeout(timer);
+      timer = window.setTimeout(apply, 80);
+    });
+
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true
+    });
+
+    window.addEventListener(
+      "resize",
+      apply,
+      { passive: true }
+    );
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener(
+      "DOMContentLoaded",
+      boot,
+      { once: true }
+    );
+  } else {
+    boot();
+  }
+})();

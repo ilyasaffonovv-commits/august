@@ -150,3 +150,53 @@ button {
     display: none !important;
   }
 }
+
+/* AUGUST NO-SELECT UI V1 */
+
+/* Keep display/interface text from getting the browser's blue selection highlight. */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+header,
+nav,
+button,
+[role="button"],
+.btn,
+.button,
+[class*="tab"],
+[class*="badge"],
+[class*="label"],
+[class*="eyebrow"] {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Make the interaction feel like a UI, not a text document. */
+button,
+[role="button"],
+.btn,
+.button,
+nav a,
+header a {
+  cursor: pointer;
+}
+
+/* Prevent accidental ghost-dragging of decorative UI assets. */
+img,
+svg {
+  -webkit-user-drag: none;
+}
+
+/* Extra fallback for browsers that still paint a selection on headings. */
+h1::selection,
+h2::selection,
+h3::selection,
+h4::selection,
+h5::selection,
+h6::selection {
+  background: transparent;
+  color: inherit;
+}

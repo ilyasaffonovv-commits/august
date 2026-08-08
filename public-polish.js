@@ -68,3 +68,81 @@
     boot();
   }
 })();
+
+/* AUGUST WHATSAPP DISPLAY PRIVACY V1 */
+(() => {
+  "use strict";
+
+  const privatePhone = "+77479662138";
+  const replacement = "Открыть WhatsApp";
+
+  const replaceVisiblePhone = (root = document.body) => {
+    if (!root) return;
+
+    const walker = document.createTreeWalker(
+      root,
+      NodeFilter.SHOW_TEXT,
+      {
+        acceptNode(node) {
+          const parent = node.parentElement;
+          if (!parent) return NodeFilter.FILTER_REJECT;
+
+          const tag = parent.tagName;
+          if (tag === "SCRIPT" || tag === "STYLE" || tag === "NOSCRIPT") {
+            return NodeFilter.FILTER_REJECT;
+          }
+
+          return node.nodeValue && node.nodeValue.includes(privatePhone)
+            ? NodeFilter.FILTER_ACCEPT
+            : NodeFilter.FILTER_REJECT;
+        }
+      }
+    );
+
+    const matches = [];
+    let node;
+
+    while ((node = walker.nextNode())) {
+      matches.push(node);
+    }
+
+    for (const textNode of matches) {
+      textNode.nodeValue = textNode.nodeValue.replaceAll(
+        privatePhone,
+        replacement
+      );
+    }
+  };
+
+  const bootPrivacy = () => {
+    replaceVisiblePhone(document.body);
+
+    const observer = new MutationObserver((mutations) => {
+      for (const mutation of mutations) {
+        for (const added of mutation.addedNodes) {
+          if (added.nodeType === Node.TEXT_NODE) {
+            if (added.nodeValue && added.nodeValue.includes(privatePhone)) {
+              added.nodeValue = added.nodeValue.replaceAll(
+                privatePhone,
+                replacement
+              );
+            }
+          } else if (added.nodeType === Node.ELEMENT_NODE) {
+            replaceVisiblePhone(added);
+          }
+        }
+      }
+    });
+
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true
+    });
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", bootPrivacy, { once: true });
+  } else {
+    bootPrivacy();
+  }
+})();

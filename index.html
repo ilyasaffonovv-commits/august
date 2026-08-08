@@ -270,8 +270,11 @@
   }
 </style>
 
+  <link rel="stylesheet" href="public-v2.css?v=20260808215006">
 </head>
 <body>
+<!-- AUGUST-PUBLIC-V2-PREMIUM -->
+
 
 <div id="august-boot-intro-v1" aria-hidden="true">
   <div class="august-boot-shell">
@@ -284,9 +287,34 @@
     </div>
 
     <div class="august-boot-main">
+
+      <div class="august-boot-emblem" aria-hidden="true">
+        <div class="august-boot-emblem-pulse"></div>
+        <div class="august-boot-emblem-core">A</div>
+      </div>
+
       <div class="august-boot-kicker">Initializing public interface</div>
       <h1 class="august-boot-title">AUGUST</h1>
       <p class="august-boot-subtitle">Command Center / intelligent agent interface</p>
+
+      <div class="august-boot-systems">
+        <div class="august-boot-system">
+          <span class="august-boot-system-dot"></span>
+          <span>CORE</span>
+          <span class="august-boot-system-state">ONLINE</span>
+        </div>
+        <div class="august-boot-system">
+          <span class="august-boot-system-dot"></span>
+          <span>MEMORY</span>
+          <span class="august-boot-system-state">ONLINE</span>
+        </div>
+        <div class="august-boot-system">
+          <span class="august-boot-system-dot"></span>
+          <span>AUTONOMY</span>
+          <span class="august-boot-system-state">ONLINE</span>
+        </div>
+      </div>
+
 
       <div class="august-boot-sections">
         <span class="august-boot-chip">01 Product</span>
@@ -559,8 +587,8 @@
   const reduced = window.matchMedia &&
     window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  const holdMs = reduced ? 260 : 1080;
-  const cleanupMs = reduced ? 340 : 1580;
+  const holdMs = reduced ? 220 : 980;
+  const cleanupMs = reduced ? 320 : 1440;
 
   window.setTimeout(() => {
     splash.classList.add("august-boot-done");
@@ -573,5 +601,6 @@
 })();
 </script>
 
+  <script src="public-v2.js?v=20260808215006" defer></script>
 </body>
 </html>

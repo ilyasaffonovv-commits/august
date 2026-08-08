@@ -1,0 +1,218 @@
+/* AUGUST FINAL STABLE POLISH V2.1
+   CSS-only. Layout-neutral. No reveal/hide logic. No JavaScript. */
+
+/* ZERO SELECTION / ZERO BLUE CLICK OUTLINE */
+html,
+body,
+body *,
+body *::before,
+body *::after {
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+  -webkit-touch-callout: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+}
+
+body *::selection,
+body *::-moz-selection {
+  background: transparent !important;
+  color: inherit !important;
+}
+
+img,
+svg,
+video,
+canvas {
+  -webkit-user-drag: none !important;
+  user-drag: none !important;
+}
+
+a,
+button,
+[role="button"],
+summary,
+label {
+  cursor: pointer;
+}
+
+*:focus {
+  outline: none !important;
+}
+
+a:focus-visible,
+button:focus-visible,
+[role="button"]:focus-visible,
+summary:focus-visible {
+  box-shadow:
+    0 0 0 1px rgba(111, 205, 255, .72),
+    0 0 0 4px rgba(111, 205, 255, .08),
+    0 0 28px rgba(120, 121, 255, .10) !important;
+}
+
+/* TEXT / RENDERING */
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: geometricPrecision;
+  scroll-behavior: smooth;
+}
+
+h1,
+h2,
+h3 {
+  text-shadow:
+    0 1px 0 rgba(255,255,255,.035),
+    0 0 34px rgba(105,138,255,.045);
+}
+
+/* PREMIUM INTERACTION */
+a,
+button,
+[role="button"],
+summary {
+  transition:
+    color 160ms ease,
+    border-color 180ms ease,
+    background-color 180ms ease,
+    box-shadow 200ms ease,
+    filter 160ms ease,
+    transform 180ms cubic-bezier(.2,.8,.2,1);
+}
+
+@media (pointer: fine) {
+  a:hover,
+  button:hover,
+  [role="button"]:hover,
+  summary:hover {
+    filter: brightness(1.075) saturate(1.035);
+  }
+
+  button:active,
+  [role="button"]:active {
+    transform: scale(.985);
+  }
+}
+
+/* CARDS / PANELS: VISUAL ONLY */
+main article,
+main [class*="card"],
+main [class*="panel"],
+main [class*="tile"],
+main [class*="module"] {
+  transition:
+    border-color 180ms ease,
+    box-shadow 220ms ease,
+    background-color 180ms ease,
+    filter 180ms ease,
+    transform 190ms cubic-bezier(.2,.8,.2,1);
+}
+
+@media (pointer: fine) {
+  main article:hover,
+  main [class*="card"]:hover,
+  main [class*="panel"]:hover,
+  main [class*="tile"]:hover,
+  main [class*="module"]:hover {
+    border-color: rgba(145, 171, 255, .30) !important;
+    box-shadow:
+      0 22px 64px rgba(0,0,0,.17),
+      0 0 0 1px rgba(120,157,255,.025),
+      0 0 38px rgba(90,151,255,.055);
+    filter: brightness(1.018);
+    transform: translateY(-2px);
+  }
+}
+
+/* HEADER / NAV / FOOTER MICRO-POLISH */
+header,
+nav,
+footer {
+  transition:
+    border-color 180ms ease,
+    box-shadow 220ms ease,
+    filter 180ms ease;
+}
+
+nav a,
+header a {
+  text-decoration-thickness: 1px;
+  text-underline-offset: .26em;
+}
+
+/* STATUS / BADGES */
+[class*="status"],
+[class*="live"],
+[class*="badge"],
+[class*="chip"],
+[class*="pill"] {
+  transition:
+    border-color 180ms ease,
+    box-shadow 200ms ease,
+    filter 180ms ease;
+}
+
+@media (pointer: fine) {
+  [class*="status"]:hover,
+  [class*="live"]:hover,
+  [class*="badge"]:hover,
+  [class*="chip"]:hover,
+  [class*="pill"]:hover {
+    border-color: rgba(132, 184, 255, .30) !important;
+    box-shadow: 0 0 26px rgba(91, 168, 255, .075);
+    filter: brightness(1.045);
+  }
+}
+
+/* PREMIUM SCROLLBAR - visual colors only, no geometry */
+html {
+  scrollbar-color: rgba(112, 139, 203, .47) rgba(255,255,255,.02);
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255,255,255,.018);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    180deg,
+    rgba(132,105,255,.60),
+    rgba(82,175,255,.52)
+  );
+  border-radius: 999px;
+  border: 3px solid rgba(7,10,17,.90);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    180deg,
+    rgba(151,126,255,.72),
+    rgba(96,192,255,.64)
+  );
+}
+
+/* REDUCED MOTION */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  a,
+  button,
+  [role="button"],
+  summary,
+  main article,
+  main [class*="card"],
+  main [class*="panel"],
+  main [class*="tile"],
+  main [class*="module"],
+  [class*="status"],
+  [class*="live"],
+  [class*="badge"],
+  [class*="chip"],
+  [class*="pill"] {
+    transition: none !important;
+    transform: none !important;
+  }
+}

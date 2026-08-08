@@ -24,7 +24,7 @@
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="manifest" href="site.webmanifest">
   <link rel="canonical" href="https://ilyasaffonovv-commits.github.io/august/">
-  <link rel="stylesheet" href="public-polish.css">
+  <link rel="stylesheet" href="public-polish.css?v=20260808213217">
 </head>
 <body>
 <div class="ambient ambient-a"></div><div class="ambient ambient-b"></div><div class="grid-overlay"></div>
@@ -184,6 +184,93 @@
 
 <footer class="footer shell"><div><strong>AUGUST</strong><span>COMMAND CENTER V3</span></div><div>LOCAL FIRST · VERIFIED EXECUTION · <span id="year"></span></div></footer>
 <script src="script.js"></script>
-  <script src="public-polish.js" defer></script>
+  <script src="public-polish.js?v=20260808213217" defer></script>
+
+<script id="AUGUST-CONTACT-PRIVACY-INLINE-V2">
+(() => {
+  "use strict";
+
+  const replacement = "Открыть WhatsApp";
+  const phoneDigits = "77479662138";
+
+  const looksLikePhone = (text) => {
+    const digits = String(text || "").replace(/\D/g, "");
+    return digits === phoneDigits;
+  };
+
+  const scrubVisibleText = (root) => {
+    if (!root) return;
+
+    const walker = document.createTreeWalker(
+      root,
+      NodeFilter.SHOW_TEXT,
+      {
+        acceptNode(node) {
+          const parent = node.parentElement;
+          if (!parent) return NodeFilter.FILTER_REJECT;
+
+          const tag = parent.tagName;
+          if (tag === "SCRIPT" || tag === "STYLE" || tag === "NOSCRIPT") {
+            return NodeFilter.FILTER_REJECT;
+          }
+
+          return looksLikePhone(node.nodeValue)
+            ? NodeFilter.FILTER_ACCEPT
+            : NodeFilter.FILTER_REJECT;
+        }
+      }
+    );
+
+    const found = [];
+    let node;
+
+    while ((node = walker.nextNode())) {
+      found.push(node);
+    }
+
+    for (const textNode of found) {
+      textNode.nodeValue = replacement;
+    }
+  };
+
+  const boot = () => {
+    scrubVisibleText(document.body);
+
+    const observer = new MutationObserver((mutations) => {
+      for (const mutation of mutations) {
+        if (mutation.type === "characterData") {
+          if (looksLikePhone(mutation.target.nodeValue)) {
+            mutation.target.nodeValue = replacement;
+          }
+          continue;
+        }
+
+        for (const added of mutation.addedNodes) {
+          if (added.nodeType === Node.TEXT_NODE) {
+            if (looksLikePhone(added.nodeValue)) {
+              added.nodeValue = replacement;
+            }
+          } else if (added.nodeType === Node.ELEMENT_NODE) {
+            scrubVisibleText(added);
+          }
+        }
+      }
+    });
+
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+      characterData: true
+    });
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", boot, { once: true });
+  } else {
+    boot();
+  }
+})();
+</script>
+
 </body>
 </html>

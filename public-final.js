@@ -672,9 +672,7 @@
     const observer = new MutationObserver(unhide);
     observer.observe(document.body, {
       subtree: true,
-      childList: true,
-      attributes: true,
-      attributeFilter: ["class", "style"]
+      childList: true
     });
 
     window.setTimeout(unhide, 100);
@@ -693,3 +691,6 @@
     boot();
   }
 })();
+
+
+/* AUGUST_INTRO_TIMER_HOTFIX_V1 */

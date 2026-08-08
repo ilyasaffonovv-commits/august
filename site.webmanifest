@@ -1,0 +1,16 @@
+{
+  "name": "AUGUST Command Center",
+  "short_name": "AUGUST",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#0c1220",
+  "theme_color": "#17233d",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

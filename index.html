@@ -271,11 +271,8 @@
 </style>
 
   <link rel="stylesheet" href="public-v2.css?v=20260808215006">
-  <link rel="stylesheet" href="public-final.css?v=20260808222510">
 </head>
 <body>
-<!-- AUGUST-FINAL-PREMIUM-V3 -->
-
 <!-- AUGUST-PUBLIC-V2-PREMIUM -->
 
 
@@ -590,8 +587,8 @@
   const reduced = window.matchMedia &&
     window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  const holdMs = reduced ? 260 : 1750;
-  const cleanupMs = reduced ? 360 : 2250;
+  const holdMs = reduced ? 220 : 980;
+  const cleanupMs = reduced ? 320 : 1440;
 
   window.setTimeout(() => {
     splash.classList.add("august-boot-done");
@@ -605,6 +602,5 @@
 </script>
 
   <script src="public-v2.js?v=20260808215006" defer></script>
-  <script src="public-final.js?v=20260808223050" defer></script>
 </body>
 </html>
